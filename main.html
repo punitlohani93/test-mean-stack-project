@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chirp</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="src/chirpApp.js"></script>
+</head>
+
+<body ng-app="chirpApp">
+    <div id="main" ng-controller="mainController">
+        <form>
+            <input type="text" name="Enter your name">
+            <textarea required maxlength="200" rows="3" placeholder="Say Something!!"></textarea>
+            <input class="button" type="submit" value="Chirp!">
+        </form>
+        <div id="post-stream">
+            <h4>Chirp Feed</h4>
+        </div>
+    </div>
+</body>
+
+</html>
