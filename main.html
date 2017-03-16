@@ -3,19 +3,39 @@
 
 <head>
     <title>Chirp</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript" src="src/chirpApp.js"></script>
 </head>
 
 <body ng-app="chirpApp">
-    <div id="main" ng-controller="mainController">
-        <form>
-            <input type="text" name="Enter your name">
-            <textarea required maxlength="200" rows="3" placeholder="Say Something!!"></textarea>
-            <input class="button" type="submit" value="Chirp!">
-        </form>
-        <div id="post-stream">
-            <h4>Chirp Feed</h4>
+    <div id="main" class="container" ng-controller="mainController">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="clearfix">
+                <form ng-Submit="post()">
+                    <div class="user-handle-class input-group col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        <span class="input-group-addon" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" required placeholder="Enter your name" name="user-handle" ng-model="newPost.created_by" aria-describedby="basic-addon1">
+                    </div>
+                    <textarea required class="form-control" maxlength="200" rows="3" placeholder="Say something" ng-model="newPost.text"></textarea>
+                    <input class="btn submit-btn pull-right" type="submit" value="Chirp">
+                </form>
+            </div>
+            <div id="post-stream">
+                <h3>Chirp Feed</h3>
+                <div class="post" id="post-feed" ng-repeat="post in posts | orderBy : 'created_at' : true" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <p>{{post.text}}</p>
+                    <small>Posted by @{{post.created_by}}</small>
+                    <small class="pull-right">{{post.created_at | date:"h:mm a 'on' MMM d, y"}}</small>
+                </div>
+            </div>
         </div>
     </div>
 </body>
